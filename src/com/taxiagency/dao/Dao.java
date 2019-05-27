@@ -5,8 +5,9 @@ import java.util.List;
 
 public interface Dao<T extends Entity> {
 
-    void save(T obj);
+    String save(T obj);
     void update(T obj);
+    String upsert(T obj);
     void delete(T obj);
     T findById(String id);
     List<T> findAll();
