@@ -2,6 +2,7 @@ package com.taxiagency;
 
 import com.taxiagency.dao.Dao;
 import com.taxiagency.dao.DriverRamDao;
+import com.taxiagency.dao.FileDao;
 import com.taxiagency.domain.Driver;
 import java.util.List;
 
@@ -20,6 +21,15 @@ public class Main {
 
         List<Driver> drivers = daoDriver.findAll();
         System.out.println(drivers);
+
+        Dao<Driver> daofileDriver = new FileDao<>();
+        daofileDriver.save(driver);
+        daofileDriver.save(driver3);
+        daofileDriver.save(driver2);
+
+        List<Driver> filedrivers = daoDriver.findAll();
+        System.out.println(filedrivers);
+
 
 
     }
