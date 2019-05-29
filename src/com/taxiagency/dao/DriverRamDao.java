@@ -3,7 +3,7 @@ package com.taxiagency.dao;
 import com.taxiagency.domain.Driver;
 import java.util.*;
 
-public class DriverRamDao extends RamDao implements DriverDao {
+public class DriverRamDao extends RamDao<Driver> implements DriverDao {
 
     private Map<String, Driver> ramDriver;
 

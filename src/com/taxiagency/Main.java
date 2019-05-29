@@ -20,7 +20,7 @@ public class Main {
         daoDriver.save(driver3);
 
         List<Driver> drivers = daoDriver.findAll();
-        System.out.println(drivers);
+     //   System.out.println(drivers);
 
         Dao<Driver> daofileDriver = new FileDao<>();
         daofileDriver.save(driver);
