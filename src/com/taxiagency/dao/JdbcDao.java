@@ -69,7 +69,7 @@ public class JdbcDao <T extends Entity> implements Dao<T>{
 
     @Override
     public T findById(String id) {
-        String query = ("select name from drivers where id="+id);
+        String query = ("select name from drivers where id='111'");
         T result = null;
 
         try {
@@ -82,7 +82,10 @@ public class JdbcDao <T extends Entity> implements Dao<T>{
             // executing query
             rs = stmt.executeQuery(query);
 
-            result = (T) rs.getObject(1);
+            while (rs.next())
+            {
+                result = (T) rs.getObject(1);
+            }
 
         } catch (SQLException sqlEx) {
             sqlEx.printStackTrace();
