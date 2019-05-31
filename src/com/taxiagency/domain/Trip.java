@@ -64,7 +64,17 @@ public class Trip implements Entity{
     }
 
     @Override
+    public String getName() {
+        return null;
+    }
+
+    @Override
     public void setId(String id) {
+
+    }
+
+    @Override
+    public void setName(String id) {
 
     }
 }

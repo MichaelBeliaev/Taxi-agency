@@ -9,6 +9,7 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.List;
 
+
 public class JdbcDao <T extends Entity> implements Dao<T>{
 
     private static final String url = "jdbc:mysql://localhost:3306/stormnet";
@@ -22,8 +23,10 @@ public class JdbcDao <T extends Entity> implements Dao<T>{
 
     @Override
     public void save(T obj) {
-/*
-        String query = "insert into drivers (id, name) VALUES";
+
+        String id =obj.getId();
+        String name=obj.getName();
+        String query = "insert into drivers (id, name) VALUES ('"+id+"','"+name+"')";
 
         try {
             // opening database connection to MySQL server
@@ -32,8 +35,10 @@ public class JdbcDao <T extends Entity> implements Dao<T>{
             // getting Statement object to execute query
             stmt = con.createStatement();
 
+            stmt.executeUpdate(query);
+
             // executing query
-            rs = stmt.executeUpdate(query);
+          //  rs = stmt.executeUpdate(query);
 
         } catch (SQLException sqlEx) {
             sqlEx.printStackTrace();
@@ -45,16 +50,35 @@ public class JdbcDao <T extends Entity> implements Dao<T>{
             try {
                 stmt.close();
             } catch (SQLException se) { se.printStackTrace(); }
-            try {
-                rs.close();
-            } catch (SQLException se) { se.printStackTrace(); }
-        }*/
+        }
     }
 
 
     @Override
     public void update(T obj) {
 
+        String id =obj.getId();
+        String name=obj.getName();
+        String query = "update drivers set name='"+name+
+                "' where id='"+id+"'";
+
+        try {
+            con = DriverManager.getConnection(url, user, password);
+
+            stmt = con.createStatement();
+
+            stmt.executeUpdate(query);
+
+        } catch (SQLException sqlEx) {
+            sqlEx.printStackTrace();
+        } finally {
+            try {
+                con.close();
+            } catch (SQLException se) { se.printStackTrace();}
+            try {
+                stmt.close();
+            } catch (SQLException se) { se.printStackTrace(); }
+        }
     }
 
     @Override
@@ -64,14 +88,33 @@ public class JdbcDao <T extends Entity> implements Dao<T>{
 
     @Override
     public void delete(T obj) {
+        String id =obj.getId();
+        String name=obj.getName();
+        String query = "delete from drivers where id='"+id+"' and name='"+name+"'";
 
+        try {
+            con = DriverManager.getConnection(url, user, password);
+
+            stmt = con.createStatement();
+
+            stmt.executeUpdate(query);
+
+        } catch (SQLException sqlEx) {
+            sqlEx.printStackTrace();
+        } finally {
+            try {
+                con.close();
+            } catch (SQLException se) { se.printStackTrace();}
+            try {
+                stmt.close();
+            } catch (SQLException se) { se.printStackTrace(); }
+        }
     }
 
     @Override
     public T findById(String id) {
-        String query = ("select name from drivers where id='111'");
-        T result = null;
-
+        String query = ("select name from drivers where id='"+id+"'");
+        Entity result = (T) new Object ();
         try {
             // opening database connection to MySQL server
             con = DriverManager.getConnection(url, user, password);
@@ -84,24 +127,24 @@ public class JdbcDao <T extends Entity> implements Dao<T>{
 
             while (rs.next())
             {
-                result = (T) rs.getObject(1);
+              result.setName(rs.getString(1));
             }
 
         } catch (SQLException sqlEx) {
             sqlEx.printStackTrace();
         } finally {
-            //close connection ,stmt and resultset here
+
             try {
                 con.close();
-            } catch (SQLException se) { /*can't do anything */ }
+            } catch (SQLException se) {  se.printStackTrace(); }
             try {
                 stmt.close();
-            } catch (SQLException se) { /*can't do anything */ }
+            } catch (SQLException se) {  se.printStackTrace(); }
             try {
                 rs.close();
-            } catch (SQLException se) { /*can't do anything */ }
+            } catch (SQLException se) {  se.printStackTrace(); }
         }
-        return result;
+        return (T) result;
     }
 
     @Override

@@ -5,6 +5,15 @@ public class Driver implements Entity{
     private String id;
     private String name;
 
+    public Driver(String id, String name) {
+        this.id = id;
+        this.name = name;
+    }
+
+    public Driver(String id) {
+        this.id = id;
+    }
+
     public void setName(String name) {
         this.name = name;
     }
@@ -13,18 +22,12 @@ public class Driver implements Entity{
         return name;
     }
 
-    public Driver(String id, String name) {
-        this.id = id;
-        this.name = name;
-    }
-
     public String getId() {
         return id;
     }
 
     @Override
     public void setId(String id) {
-
     }
 
     @Override

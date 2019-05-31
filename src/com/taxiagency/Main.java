@@ -1,9 +1,6 @@
 package com.taxiagency;
 
-import com.taxiagency.dao.Dao;
-import com.taxiagency.dao.DriverRamDao;
-import com.taxiagency.dao.FileDao;
-import com.taxiagency.dao.JdbcDao;
+import com.taxiagency.dao.*;
 import com.taxiagency.domain.Driver;
 
 import java.util.List;
@@ -17,10 +14,10 @@ public class Main  {
         Driver driver2 = new Driver("124","Fedia");
         Driver driver3 = new Driver("125","Tolya");
 
-        daoDriver.save(driver);
         //daoDriver.save(driver);
-        daoDriver.save(driver2);
-        daoDriver.save(driver3);
+        //daoDriver.save(driver);
+        //daoDriver.save(driver2);
+        //daoDriver.save(driver3);
 
         List<Driver> drivers = daoDriver.findAll();
      //   System.out.println(drivers);
@@ -33,8 +30,13 @@ public class Main  {
         List<Driver> filedrivers = daoDriver.findAll();
         System.out.println(filedrivers);
 
-        JdbcDao<Driver> dr =new JdbcDao<>();
+        DriverJdbcDao dr = new DriverJdbcDao();
+        //dr.save(driver);
+        //driver.setName("Bahtijar");
+        //dr.update(driver);
+
         System.out.println("Driver's name is "+ dr.findById("111"));
+      //  System.out.println("Driver's id is "+ dr.findByName("Misha"));
 
     }
 }
