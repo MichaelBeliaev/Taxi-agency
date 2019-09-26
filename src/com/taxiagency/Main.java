@@ -31,11 +31,11 @@ public class Main  {
         System.out.println(filedrivers);
 
         DriverJdbcDao dr = new DriverJdbcDao();
-        //dr.save(driver);
-        //driver.setName("Bahtijar");
-        //dr.update(driver);
+        dr.save(driver);
+        driver.setName("Ravshan");
+        dr.update(driver);
 
-        System.out.println("Driver's name is "+ dr.findById("111"));
+       // System.out.println("Driver's name is "+ dr.findById("111"));
       //  System.out.println("Driver's id is "+ dr.findByName("Misha"));
 
     }
